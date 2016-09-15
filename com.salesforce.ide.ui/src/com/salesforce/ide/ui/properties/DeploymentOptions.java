@@ -36,6 +36,7 @@ public class DeploymentOptions extends BasePropertyPage {
 
     private Button preferToolingDeploymentCheckbox;
     private Button disableSaveToServerDirtyResourceCheckCheckbox;
+    private Button disableSaveToServerSynchronizeCheckCheckbox;
     private ProjectController projectController = null;
     private ForceProject forceProject;
 
@@ -79,6 +80,11 @@ public class DeploymentOptions extends BasePropertyPage {
         disableSaveToServerDirtyResourceCheckCheckbox = new Button(deploymentComposite, SWT.CHECK);
         disableSaveToServerDirtyResourceCheckCheckbox.setText(UIMessages.getString("DeploymentOptions_DisableSaveToServerDirtyResourceCheck"));;
         
+        // 'Right click project > Force.com > Deployments Options > Disable 'Save to Server' synchronize check'
+        disableSaveToServerSynchronizeCheckCheckbox = new Button(deploymentComposite, SWT.CHECK);
+        disableSaveToServerSynchronizeCheckCheckbox.setText(UIMessages.getString("DeploymentOptions_DisableSaveToServerSynchronizeCheck"));;
+        
+        
         loadFromPreferences();
 
         return deploymentComposite;
@@ -91,6 +97,8 @@ public class DeploymentOptions extends BasePropertyPage {
         
         disableSaveToServerDirtyResourceCheckCheckbox.setSelection(forceProject.getDisableSaveToServerDirtyResourceCheck());
 
+        disableSaveToServerSynchronizeCheckCheckbox.setSelection(forceProject.getDisableSaveToServerSynchronizeCheck());
+
         projectController.getProjectModel().setForceProject(forceProject);
     }
 
@@ -99,6 +107,7 @@ public class DeploymentOptions extends BasePropertyPage {
         try {
             forceProject.setPreferToolingDeployment(preferToolingDeploymentCheckbox.getSelection());
             forceProject.setDisableSaveToServerDirtyResourceCheck(disableSaveToServerDirtyResourceCheckCheckbox.getSelection());
+            forceProject.setDisableSaveToServerSynchronizeCheck(disableSaveToServerSynchronizeCheckCheckbox.getSelection());
             projectController.saveSettings(new NullProgressMonitor());
         } catch (InterruptedException e) {
             // Not possible with a NullProgressMonitor

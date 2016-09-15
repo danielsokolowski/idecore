@@ -59,6 +59,7 @@ public class SaveToServerActionController extends ActionController {
     }
 
     @Override
+    // returns  `false` implies cancel action, `true` to continue
     public boolean preRun() {
         if (Utils.isEmpty(selectedResources)) {
             logger.info("Operation cancelled.  Resources not provided.");
@@ -76,13 +77,17 @@ public class SaveToServerActionController extends ActionController {
         if (!checkForDirtyResources()) {
             return false;
         }
-
+        
         // proactively sync check against org to avoid overwriting updated content; true to cancel on sync error
-        boolean syncResult = syncCheck(false);
-        if (!syncResult) {
-            return false;
+        if (getProjectService().getForceProject(project).getDisableSaveToServerSynchronizeCheck() == true) { // FIXME: true) { // skip if disabled by user        	
+        	logger.info("Preference set to skip synchronization check (`syncCheck(...)` check.");
+        } else {
+        	boolean syncResult = syncCheck(false);
+	        if (!syncResult) {
+	            return false;
+	        }
         }
-
+        
         boolean response = getUserConfirmation();
 
         if (!response) {

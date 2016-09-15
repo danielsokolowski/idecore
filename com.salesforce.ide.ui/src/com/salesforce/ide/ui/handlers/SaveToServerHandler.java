@@ -129,7 +129,7 @@ public final class SaveToServerHandler extends BaseHandler {
     private static SaveToServerActionController buildController(final IStructuredSelection selection) {
         final IAdapterManager adapterManager = Platform.getAdapterManager();
 
-        final List<IResource> selectedResources = new ArrayList<>();
+        final List<IResource> selectedResources = new ArrayList<IResource>();
         for (Iterator<?> iterator = selection.iterator(); iterator.hasNext();) {
             final IResource selectedResource = (IResource) adapterManager.getAdapter(iterator.next(), IResource.class);
             if (null != selectedResource) {

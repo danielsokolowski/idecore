@@ -169,6 +169,7 @@ public abstract class ActionController {
         return null;
     }
 
+
     protected boolean syncCheck(boolean cancel) {
         // proactively sync check against org to avoid overwriting updated content
         try {

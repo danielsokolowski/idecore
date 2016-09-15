@@ -42,6 +42,7 @@ public class ForceProject extends Org {
     private String projectIdentifier = null;
     private boolean preferToolingDeployment = false;
     private boolean disableSaveToServerDirtyResourceCheck = false;
+    private boolean disableSaveToServerSynchronizeCheck = false;
     private String[] enabledComponentTypes;
 
     //   C O N S T R U C T O R S
@@ -136,6 +137,13 @@ public class ForceProject extends Org {
         disableSaveToServerDirtyResourceCheck = bValue;
     }
     
+    public boolean getDisableSaveToServerSynchronizeCheck() {
+    	return disableSaveToServerSynchronizeCheck;
+    }
+    
+    public void setDisableSaveToServerSynchronizeCheck(boolean bValue) {
+    	disableSaveToServerSynchronizeCheck = bValue;
+    }
 
     @Override
     public String getFullLogDisplay() {
