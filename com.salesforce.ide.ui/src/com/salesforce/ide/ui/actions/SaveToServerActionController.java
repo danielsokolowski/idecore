@@ -190,7 +190,12 @@ public class SaveToServerActionController extends ActionController {
     }
     
     @VisibleForTesting
+    // `false` implies operation cancelled
     protected boolean getUserConfirmation() {
+    	if (getProjectService().getForceProject(project).getDisableSaveToServerUserConfirmationCheck() == true) {
+        	logger.info("Preference set to skip user confiramtion check (`getUserConfirmation(...)`.");
+        	return true;
+        }
     	return Utils.openQuestion(getProject(), getShell(), "Confirm Save", UIMessages.getString("SaveToServerHandler.Overwrite.message"));
     }
     

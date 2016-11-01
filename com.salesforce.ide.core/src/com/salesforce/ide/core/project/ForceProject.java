@@ -43,6 +43,7 @@ public class ForceProject extends Org {
     private boolean preferToolingDeployment = false;
     private boolean disableSaveToServerDirtyResourceCheck = false;
     private boolean disableSaveToServerSynchronizeCheck = false;
+    private boolean disableSaveToServerUserConfirmationCheck = false;
     private String[] enabledComponentTypes;
 
     //   C O N S T R U C T O R S
@@ -135,6 +136,14 @@ public class ForceProject extends Org {
     
     public void setDisableSaveToServerDirtyResourceCheck(boolean bValue) {
         disableSaveToServerDirtyResourceCheck = bValue;
+    }
+
+    public boolean getDisableSaveToServerUserConfirmationCheck() {
+    	return disableSaveToServerUserConfirmationCheck;
+    }
+    
+    public void setDisableSaveToServerUserConfirmationCheck(boolean bValue) {
+    	disableSaveToServerUserConfirmationCheck = bValue;
     }
     
     public boolean getDisableSaveToServerSynchronizeCheck() {

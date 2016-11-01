@@ -37,6 +37,7 @@ public class DeploymentOptions extends BasePropertyPage {
     private Button preferToolingDeploymentCheckbox;
     private Button disableSaveToServerDirtyResourceCheckCheckbox;
     private Button disableSaveToServerSynchronizeCheckCheckbox;
+    private Button disableSaveToServerUserConfirmationCheckCheckbox;
     private ProjectController projectController = null;
     private ForceProject forceProject;
 
@@ -84,6 +85,10 @@ public class DeploymentOptions extends BasePropertyPage {
         disableSaveToServerSynchronizeCheckCheckbox = new Button(deploymentComposite, SWT.CHECK);
         disableSaveToServerSynchronizeCheckCheckbox.setText(UIMessages.getString("DeploymentOptions_DisableSaveToServerSynchronizeCheck"));;
         
+        // 'Right click project > Force.com > Deployments Options > Disable 'Save to Server' user confirmation check'
+        disableSaveToServerUserConfirmationCheckCheckbox = new Button(deploymentComposite, SWT.CHECK);
+        disableSaveToServerUserConfirmationCheckCheckbox.setText(UIMessages.getString("DeploymentOptions_DisableSaveToServerUserConfirmationCheck"));;
+        
         
         loadFromPreferences();
 
@@ -99,6 +104,8 @@ public class DeploymentOptions extends BasePropertyPage {
 
         disableSaveToServerSynchronizeCheckCheckbox.setSelection(forceProject.getDisableSaveToServerSynchronizeCheck());
 
+        disableSaveToServerUserConfirmationCheckCheckbox.setSelection(forceProject.getDisableSaveToServerUserConfirmationCheck());
+
         projectController.getProjectModel().setForceProject(forceProject);
     }
 
@@ -108,6 +115,7 @@ public class DeploymentOptions extends BasePropertyPage {
             forceProject.setPreferToolingDeployment(preferToolingDeploymentCheckbox.getSelection());
             forceProject.setDisableSaveToServerDirtyResourceCheck(disableSaveToServerDirtyResourceCheckCheckbox.getSelection());
             forceProject.setDisableSaveToServerSynchronizeCheck(disableSaveToServerSynchronizeCheckCheckbox.getSelection());
+            forceProject.setDisableSaveToServerUserConfirmationCheck(disableSaveToServerUserConfirmationCheckCheckbox.getSelection());
             projectController.saveSettings(new NullProgressMonitor());
         } catch (InterruptedException e) {
             // Not possible with a NullProgressMonitor
