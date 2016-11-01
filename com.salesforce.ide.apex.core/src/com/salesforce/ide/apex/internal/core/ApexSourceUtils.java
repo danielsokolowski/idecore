@@ -34,7 +34,8 @@ import com.salesforce.ide.core.model.ApexCodeLocation;
 import com.salesforce.ide.core.model.Component;
 import com.salesforce.ide.core.services.ProjectService;
 
-import apex.jorje.data.Loc.RealLoc;
+import apex.jorje.data.Locations;
+import apex.jorje.data.Location;
 import apex.jorje.semantic.ast.compilation.UserClass;
 import apex.jorje.semantic.ast.member.Method;
 import apex.jorje.semantic.ast.modifier.ModifierGroup;
@@ -51,6 +52,8 @@ public class ApexSourceUtils {
     private static final Logger logger = Logger.getLogger(ApexSourceUtils.class);
 
     public static final ApexSourceUtils INSTANCE = new ApexSourceUtils();
+    public static String CLS_SUFFIX = ".cls";
+    public static String TRG_SUFFIX = ".trigger";
 
     private ApexSourceUtils() {}
 
@@ -61,7 +64,7 @@ public class ApexSourceUtils {
      * @return Map of test resources whose key is the resource ID and values are test method names
      */
     public Map<IResource, List<String>> findTestClassesInProject(IProject project) {
-        final Map<IResource, List<String>> allTests = Maps.newHashMap();
+        final Map<IResource, List<String>> allTests = Maps.newLinkedHashMap();
 
         List<IResource> projectResources = findLocalSourcesInProject(project);
         List<IResource> projectClasses = filterSourcesByClass(projectResources);
@@ -144,9 +147,11 @@ public class ApexSourceUtils {
                 @Override
                 public boolean visit(Method method, AdditionalPassScope scope) {
                     if (isTestMethod(method.getModifiers())) {
-                        RealLoc realLoc = (RealLoc) method.getLoc();
-                        ApexCodeLocation loc = new ApexCodeLocation((IFile) resource, realLoc.line, realLoc.column);
-                        testMethods.put(method.getMethodInfo().getCanonicalName(), loc);
+                    	Location realLoc = method.getLoc();
+                    	if (Locations.isReal(realLoc)) {
+                    		ApexCodeLocation loc = new ApexCodeLocation((IFile) resource, realLoc.line, realLoc.column);
+                    		testMethods.put(method.getMethodInfo().getCanonicalName(), loc);
+                    	}
                     }
                     return super.visit(method, scope);
                 }
@@ -173,9 +178,13 @@ public class ApexSourceUtils {
                 
                 @Override
                 public boolean visit(UserClass userClass, AdditionalPassScope scope) {
-                    RealLoc realLoc = (RealLoc) userClass.getLoc();
-                    returnValue[0] = new ApexCodeLocation((IFile) resource, realLoc.line, realLoc.column);
-                    return super.visit(userClass, scope);
+                	Location realLoc = userClass.getLoc();
+                	if (Locations.isReal(realLoc)) {
+                		returnValue[0] = new ApexCodeLocation((IFile) resource, realLoc.line, realLoc.column);
+                		return super.visit(userClass, scope);
+                	} else {
+                		return false;
+                	}
                 }
                 
             });
@@ -264,9 +273,9 @@ public class ApexSourceUtils {
             return Lists.newArrayList();
         } else {
             ComponentFactory componentFactory = ContainerDelegate.getInstance().getFactoryLocator().getComponentFactory(); Component classComponent = componentFactory.getComponentByComponentType("ApexClass");
-            String classExt = classComponent == null ? ".cls" : classComponent.getFileExtension();
+            String classExt = classComponent == null ? CLS_SUFFIX : classComponent.getFileExtension();
             Component trgComponent = componentFactory.getComponentByComponentType("ApexTrigger");
-            String trgExt = trgComponent == null ? ".trigger" : trgComponent.getFileExtension();
+            String trgExt = trgComponent == null ? TRG_SUFFIX : trgComponent.getFileExtension();
             
             return projectResources.stream()
                 .filter(r -> !StringUtils.isEmpty(r.getFileExtension()) && (r.getFileExtension().equals(classExt) || r.getFileExtension().equals(trgExt)))

@@ -30,6 +30,7 @@ public class AllUnitTests extends SimpleTestSuite {
         logStart(getClass().getName());
         addTest(new com.salesforce.ide.ui.editors.apex.outline.AllUnitTests());
         addTest(new com.salesforce.ide.ui.editors.apex.misc.AllUnitTests());
+        addTest(new com.salesforce.ide.ui.editors.lightning.misc.AllUnitTests());
         addTest(new com.salesforce.ide.ui.editors.propertysheets.AllUnitTests());
         addTest(new com.salesforce.ide.ui.editors.internal.apex.completions.AllUnitTests());
     }

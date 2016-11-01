@@ -43,12 +43,10 @@ public class SaveToServerActionController extends ActionController {
     protected ProjectPackageList projectPackageList = null;
     protected DeployResultExt deployResultExt = null;
 
-    //   C O N S T R U C T O R
     public SaveToServerActionController() {
         super();
     }
 
-    //   M E T H O D S
     public IDeployResultExt getDeployResultExt() {
         return deployResultExt;
     }
@@ -68,8 +66,9 @@ public class SaveToServerActionController extends ActionController {
 
         // skip if not a force managed resource
         if (!getProjectService().isManagedResources(selectedResources)) {
-            Utils.openError("Not Managed Resource", "Unable to save resource '" + getSelectedResource().getName()
-                + "'.  Resource is not a " + Constants.PRODUCT_NAME + " resource.");
+            Utils.openError(
+                "Not Managed Resource",
+                "Unable to save resource '" + getSelectedResource().getName() + "'.  Resource is not a " + Constants.PRODUCT_NAME + " resource.");
             return false;
         }
 
@@ -102,14 +101,12 @@ public class SaveToServerActionController extends ActionController {
             projectPackageList.setProject(project);
         } catch (FactoryException e) {
             logger.error("Unable to prepare project package list for resources", e);
-            Utils.openError(e, true, "Unable to prepare project package list for resources:\n\n"
-                    + ForceExceptionUtils.getRootCauseMessage(e));
+            Utils.openError(e, true, "Unable to prepare project package list for resources:\n\n" + ForceExceptionUtils.getRootCauseMessage(e));
             return false;
         } catch (CoreException e) {
             String logMessage = Utils.generateCoreExceptionLog(e);
             logger.error("Unable to prepare project package list for resources: " + logMessage, e);
-            Utils.openError(e, true, "Unable to prepare project package list for resources:\n\n"
-                    + ForceExceptionUtils.getRootCauseMessage(e));
+            Utils.openError(e, true, "Unable to prepare project package list for resources:\n\n" + ForceExceptionUtils.getRootCauseMessage(e));
             return false;
         } catch (InterruptedException e) {
             logger.warn("Save to server operation canceled by user");
@@ -119,9 +116,9 @@ public class SaveToServerActionController extends ActionController {
         return true;
     }
 
-    public boolean saveResourcesToServer(IProgressMonitor monitor) throws ForceConnectionException, FactoryException,
-    InterruptedException, CoreException, IOException, ServiceException, ForceRemoteException,
-    InvocationTargetException, Exception {
+    public boolean saveResourcesToServer(IProgressMonitor monitor)
+        throws ForceConnectionException, FactoryException, InterruptedException, CoreException, IOException,
+        ServiceException, ForceRemoteException, InvocationTargetException, Exception {
         monitorCheck(monitor);
         return deploy(monitor);
     }
@@ -129,9 +126,9 @@ public class SaveToServerActionController extends ActionController {
     @Override
     public void postRun() {}
 
-    private boolean deploy(IProgressMonitor monitor) throws ForceConnectionException, FactoryException,
-    InterruptedException, CoreException, IOException, ServiceException, ForceRemoteException,
-    InvocationTargetException, Exception {
+    private boolean deploy(IProgressMonitor monitor)
+        throws ForceConnectionException, FactoryException, InterruptedException, CoreException, IOException,
+        ServiceException, ForceRemoteException, InvocationTargetException, Exception {
         monitorCheck(monitor);
         monitorSubTask(monitor, "Saving to server...");
 

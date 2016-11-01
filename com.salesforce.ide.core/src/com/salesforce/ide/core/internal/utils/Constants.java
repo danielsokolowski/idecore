@@ -50,9 +50,12 @@ public interface Constants {
     String ANALYTIC_SNAPSHOT = "AnalyticSnapshot";
     String APEX_CLASS = "ApexClass";
     String APEX_COMPONENT = "ApexComponent";
+    String APEX_TEST_SUITE = "ApexTestSuite";
     String APEX_TRIGGER = "ApexTrigger";
     String APEX_TRIGGER_COUPLING = "ApexTriggerCoupling";
     String APEX_PAGE = "ApexPage";
+    String AURA = "aura";
+    String AURA_DEFINITION_BUNDLE = "AuraDefinitionBundle";
     String APP_MENU = "AppMenu";
     String APPROVAL_PROCESS = "ApprovalProcess";
     String AUTH_PROVIDER = "AuthProvider";
@@ -177,23 +180,48 @@ public interface Constants {
 
     String RECORD_TYPE = "RecordType";
     // O B J E C T T Y P E S G R O U P S
-    String[] APEX_COMPONENT_TYPES = { APEX_CLASS, APEX_COMPONENT, APEX_TRIGGER, APEX_PAGE, STATIC_RESOURCE };
+    String[] DEV_CODE_COMPONENT_TYPES = { APEX_CLASS, APEX_COMPONENT, APEX_TRIGGER, APEX_TEST_SUITE, APEX_PAGE, AURA_DEFINITION_BUNDLE, STATIC_RESOURCE };
 
-    List<String> RULE_TYPES = Collections.unmodifiableList(Arrays.asList(new String[] { AUTORESPONSERULES,
-            ASSIGNMENTRULES, ESCALATIONRULES }));
+    List<String> RULE_TYPES = Collections.unmodifiableList(
+        Arrays.asList(
+            new String[] { 
+                AUTORESPONSERULES,
+                ASSIGNMENTRULES,
+                ESCALATIONRULES }));
 
-    List<String> ABSTRACT_SHARING_RULE_TYPES = Collections.unmodifiableList(Arrays.asList(new String[] {
-            ACCOUNT_SHARING_RULES, ACCOUNT_TERRITORY_SHARING_RULES, CAMPAIGN_SHARING_RULES, CASE_SHARING_RULES,
-            CONTACT_SHARING_RULES, CUSTOM_OBJECT_SHARING_RULES, LEAD_SHARING_RULES, OPPORTUNITY_SHARING_RULES,
-            USER_SHARING_RULES }));
+    List<String> ABSTRACT_SHARING_RULE_TYPES = Collections.unmodifiableList(
+        Arrays.asList(
+            new String[] {
+                ACCOUNT_SHARING_RULES,
+                ACCOUNT_TERRITORY_SHARING_RULES,
+                CAMPAIGN_SHARING_RULES,
+                CASE_SHARING_RULES,
+                CONTACT_SHARING_RULES,
+                CUSTOM_OBJECT_SHARING_RULES,
+                LEAD_SHARING_RULES,
+                OPPORTUNITY_SHARING_RULES,
+                USER_SHARING_RULES }));
 
-    List<String> SHARING_RULE_TYPES = Collections.unmodifiableList(Arrays.asList(new String[] {
-            ACCOUNT_OWNER_SHARING_RULE, ACCOUNT_CRITERIA_BASED_SHARING_RULE, ACCOUNT_TERRITORY_SHARING_RULE,
-            CAMPAIGN_OWNER_SHARING_RULES, CAMPAIGN_CRITERIA_BASED_SHARING_RULES, CASE_OWNER_SHARING_RULES,
-            CASE_CRITERIA_BASED_SHARING_RULES, CONTACT_OWNER_SHARING_RULE, CONTACT_CRITERIA_BASED_SHARING_RULE,
-            CUSTOM_OBJECT_OWNER_SHARING_RULE, CUSTOM_OBJECT_CRITERIA_BASED_SHARING_RULE, LEAD_OWNER_SHARING_RULE,
-            LEAD_CRITERIA_BASED_SHARING_RULE, OPPORTUNITY_OWNER_SHARING_RULE, OPPORTUNITY_CRITERIA_BASED_SHARING_RULE,
-            USER_MEMBERSHIP_SHARING_RULE, USER_CRITERIA_BASED_SHARING_RULE }));
+    List<String> SHARING_RULE_TYPES = Collections.unmodifiableList(
+        Arrays.asList(
+            new String[] {
+                ACCOUNT_OWNER_SHARING_RULE,
+                ACCOUNT_CRITERIA_BASED_SHARING_RULE,
+                ACCOUNT_TERRITORY_SHARING_RULE,
+                CAMPAIGN_OWNER_SHARING_RULES,
+                CAMPAIGN_CRITERIA_BASED_SHARING_RULES,
+                CASE_OWNER_SHARING_RULES,
+                CASE_CRITERIA_BASED_SHARING_RULES,
+                CONTACT_OWNER_SHARING_RULE,
+                CONTACT_CRITERIA_BASED_SHARING_RULE,
+                CUSTOM_OBJECT_OWNER_SHARING_RULE,
+                CUSTOM_OBJECT_CRITERIA_BASED_SHARING_RULE,
+                LEAD_OWNER_SHARING_RULE,
+                LEAD_CRITERIA_BASED_SHARING_RULE,
+                OPPORTUNITY_OWNER_SHARING_RULE,
+                OPPORTUNITY_CRITERIA_BASED_SHARING_RULE,
+                USER_MEMBERSHIP_SHARING_RULE,
+                USER_CRITERIA_BASED_SHARING_RULE }));
 
     // A P E X
     String APEX_PREFIX = "Apex";
@@ -201,6 +229,8 @@ public interface Constants {
     // P R O P E R T I E S
     String PROP_USERNAME = "username";
     String PROP_PASSWORD = "password";
+    
+    String PROP_SESSION_ID ="sessionId";    
     String PROP_TOKEN = "token";
     String PROP_NAMESPACE_PREFIX = "namespacePrefix";
     String PROP_KEEP_ENDPOINT = "keependpoint";
@@ -370,7 +400,6 @@ public interface Constants {
     String GRAY = "GRAY";
 
     String SHARING_RULE_FILE_EXTENSION = "sharingRules";
-
     String ESCALATION_RULES_FILE_EXTENSTION = "escalationRule";
     String ASSIGNMENT_RULES_FILE_EXTENSTION = "assignmentRule";
     String AUTO_RESPONSE_RULES_FILE_EXTENSTION = "autoResponseRule";

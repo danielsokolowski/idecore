@@ -53,11 +53,13 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
                 <ref bean="ApexClass" />
                 <ref bean="ApexComponent" />
                 <ref bean="ApexPage" />
+                <ref bean="ApexTestSuite" />
                 <ref bean="ApexTrigger" />
                 <ref bean="ApexTriggerCoupling" />
                 <ref bean="AppMenu" />
                 <ref bean="ApprovalProcess" />
                 <ref bean="AuthProvider" />
+                <ref bean="AuraDefinitionBundle" />
                 <ref bean="CallCenter" />
                 <ref bean="Community" />
                 <ref bean="ConnectedApp" />
@@ -262,7 +264,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         lazy-init="true">
         <property name="ideBrandName" value="Force.com IDE" />
         <property name="platformBrandName" value="Force.com platform" />
-        <property name="ideReleaseName" value="Spring '16" />
+        <property name="ideReleaseName" value="Winter '17" />
         <property name="supportedEndpointVersions" ref="supportedApiVersions" />
     </bean>
 
