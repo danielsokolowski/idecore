@@ -8,10 +8,10 @@ This is a fork of the official Force.com IDE with following improvements:
 - Deployment Option: 'Disable 'Save to Server' user confirmation check'
 
 
-This is the core part of the Force.com IDE development tools for
-salesforce.com.
+Eclipse IDE Update site: https://raw.githubusercontent.com/danielsokolowski/idecore/master/eclipse-ide-update-site/site.xml
 
-For more information, refer to the [Force.com IDE page] [1].
+
+For more information, refer to the [Force.com original repo] [1].
 
 TODO
 ----
@@ -50,6 +50,6 @@ Contributing
 
 Please refer to [this][3] wiki page.
 
-[1]: https://developer.salesforce.com/page/Force.com_IDE
+[1]: https://github.com/forcedotcom/idecore
 [2]: http://wiki.eclipse.org/EPL
 [3]: https://github.com/forcedotcom/idecore/wiki/Contributing-Code
