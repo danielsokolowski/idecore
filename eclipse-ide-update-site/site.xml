@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/com.salesforce.ide.feature.external_39.0.0.201803161548.jar" id="com.salesforce.ide.feature.external" version="39.0.0.201803161548"/>
+   <feature url="features/com.salesforce.ide.feature.external_42.0.0.201811151147.jar" id="com.salesforce.ide.feature.external" version="42.0.0.201811151147"/>
+</site>
