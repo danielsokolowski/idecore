@@ -57,6 +57,7 @@ public class SaveToServerActionController extends ActionController {
     }
 
     @Override
+    // returns  `false` implies cancel action, `true` to continue
     public boolean preRun() {
         if (Utils.isEmpty(selectedResources)) {
             logger.info("Operation cancelled.  Resources not provided.");
@@ -75,13 +76,17 @@ public class SaveToServerActionController extends ActionController {
         if (!checkForDirtyResources()) {
             return false;
         }
-
+        
         // proactively sync check against org to avoid overwriting updated content; true to cancel on sync error
-        boolean syncResult = syncCheck(false);
-        if (!syncResult) {
-            return false;
+        if (getProjectService().getForceProject(project).getDisableSaveToServerSynchronizeCheck() == true) { // FIXME: true) { // skip if disabled by user        	
+        	logger.info("Preference set to skip synchronization check (`syncCheck(...)` check.");
+        } else {
+        	boolean syncResult = syncCheck(false);
+	        if (!syncResult) {
+	            return false;
+	        }
         }
-
+        
         boolean response = getUserConfirmation();
 
         if (!response) {
@@ -153,10 +158,17 @@ public class SaveToServerActionController extends ActionController {
     }
 
     @VisibleForTesting
+    // false implies resource is dirty, true implies resource is clean
     protected boolean checkForDirtyResources() {
         if (Utils.isEmpty(selectedResources)) {
             logger.info("Operation cancelled.  Resources not provided.");
             return false;
+        }
+
+        
+        if (getProjectService().getForceProject(project).getDisableSaveToServerDirtyResourceCheck() == true) {
+        	logger.info("Preference set to skip dirty resource (`checkForDirtyResources(...)` check.");
+        	return true;
         }
 
         for (IResource selectedResource : selectedResources) {
@@ -164,7 +176,7 @@ public class SaveToServerActionController extends ActionController {
             if (dirty) {
                 boolean result =
                         !Utils.openQuestion("Confirm Save Dirty Resource", "Save resource '"
-                                + selectedResource.getName() + "' is dirty.\n\n" + "Continue to save to server?");
+                                + selectedResource.getName() + "' is dirty.\n\n" + "Continue to save to server?\n\nThis behaviour can be disabled in project's preferences.");
                 if (result) {
                     return false;
                 }
@@ -175,7 +187,12 @@ public class SaveToServerActionController extends ActionController {
     }
     
     @VisibleForTesting
+    // `false` implies operation cancelled
     protected boolean getUserConfirmation() {
+    	if (getProjectService().getForceProject(project).getDisableSaveToServerUserConfirmationCheck() == true) {
+        	logger.info("Preference set to skip user confiramtion check (`getUserConfirmation(...)`.");
+        	return true;
+        }
     	return Utils.openQuestion(getProject(), getShell(), "Confirm Save", UIMessages.getString("SaveToServerHandler.Overwrite.message"));
     }
     

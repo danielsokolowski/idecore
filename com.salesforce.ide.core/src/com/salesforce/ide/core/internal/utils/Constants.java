@@ -252,6 +252,9 @@ public interface Constants {
     String PROP_IDE_VERSION = "ideVersion";
     String PROP_PROJECT_IDENTIFIER = "projectIdentifier";
     String PROP_PREFER_TOOLING_DEPLOYMENT = "preferToolingDeployment";
+    String PROP_DISABLE_SAVE_TO_SERVER_DIRTY_RESOURCE_CHECK = "disableSaveToServerDirtyResourceCheck";
+    String PROP_DISABLE_SAVE_TO_SERVER_SYNCHRONIZE_CHECK = "disableSaveToServerSynchronizeCheck";
+    String PROP_DISABLE_SAVE_TO_SERVER_USER_CONFIRMATION_CHECK = "disableSaveToServerUserConfirmationCheck";
 
     // P R O J E C T
     String LOGGING_LEVEL = "loggingLevel";
