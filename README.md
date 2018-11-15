@@ -11,7 +11,7 @@ This is a fork of the official Force.com IDE with following improvements:
 Eclipse IDE Update site: https://raw.githubusercontent.com/danielsokolowski/idecore/master/eclipse-ide-update-site/site.xml
 
 
-For more information, refer to the [Force.com original repo] [1].
+For more information, refer to the [Force.com original repo][1].
 
 TODO
 ----
