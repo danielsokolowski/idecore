@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.salesforce.ide.feature.external"
-      label="Force.com IDE (External Build)"
+      label="Force.com IDE (External Build) (danielsokolowski fork)"
       version="42.0.0.qualifier"
       provider-name="salesforce.com"
       plugin="com.salesforce.ide.branding"
